@@ -13,8 +13,32 @@
             <nav></nav>
         </header>
         <aside class="sidebar">sidebar</aside>
-        <main class="main">content</main>
+        <main class="main">   
+            <form>
+                <legend>Crear nuevo gasto</legend>
+                <select class="categoria" name="categoria" required>
+                    <option value="" disabled selected>Seleccione una categoria</option>
+                    <option value="food">Comida</option>
+                    <option value="transporte">Transporte</option>
+                    <option value="entretenimiento">Entretenimiento</option>
+                    <option value="servicios">Servicios</option>
+                    <option value="otro">Otro</option>
+                </select>                
+                <p>
+                    <label for="cantidad">cantidad</label>
+                    <input type="number" class="cantidad" name="cantidad" required>
+                </p>
+                <p>
+                    <label for="fecha">fecha</label>
+                    <input type="date" class="fecha" name="fecha " required>
+                </p>
+                <p>
+                    <button type="submit">Guardar gasto</button>
+                    <button type="button" class="cancel-btn">Cancel</button>
+                </p>
+            </form>
+        </main>
         <footer class="footer">footer</footer>
-    
+    <script src="script.js"></script>
 </body>
 </html>
