@@ -5,7 +5,7 @@ let btnNuevo = document.querySelector('.nuevo-btn');
 let btnDelete = document.querySelector('.eliminar');
 
 
-let gastos = [];
+let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
 
 //crear gasto nuevo
 btnNuevo.addEventListener('click', () => {
@@ -22,11 +22,13 @@ gastoForm.addEventListener('submit', (event) => {
     };
     console.log(gastos);
     addGasto(gasto);
+    gastoForm.reset();
     gastoForm.classList.add('hidden');
 });
 
 function addGasto(gasto){
     gastos.push(gasto);
+    localStorage.setItem("gastos", JSON.stringify(gastos));
     render(gasto, gastos.length - 1);
 };
 
@@ -39,6 +41,7 @@ gastosContainer.addEventListener('click', (event) =>{
 
         gastoDiv.remove();
         gastos.splice(gastoId, 1);
+        localStorage.setItem("gastos", JSON.stringify(gastos));
         console.log('Expense deleted:', gastos);
 
         renderAllGastos();
@@ -58,9 +61,6 @@ function render(gasto, index){
                             `
     gastosContainer.appendChild(nuevoGasto);
 }
-gastos.forEach(gasto => {
-    render(gasto)
-});
 
 function renderAllGastos(){
     gastosContainer.innerHTML = '';
@@ -68,3 +68,5 @@ function renderAllGastos(){
         render(gasto, index)
     });
 }
+
+renderAllGastos();
