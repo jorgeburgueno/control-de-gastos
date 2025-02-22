@@ -14,9 +14,10 @@
         </header>
         <aside class="sidebar">sidebar</aside>
         <main class="main">   
-            <form>
+            <button class="nuevo-btn">Crear nuevo gasto</button>
+            <form id="gastos-form">
                 <legend>Crear nuevo gasto</legend>
-                <select class="categoria" name="categoria" required>
+                <select id="categoria" name="categoria" required>
                     <option value="" disabled selected>Seleccione una categoria</option>
                     <option value="food">Comida</option>
                     <option value="transporte">Transporte</option>
@@ -26,11 +27,11 @@
                 </select>                
                 <p>
                     <label for="cantidad">cantidad</label>
-                    <input type="number" class="cantidad" name="cantidad" required>
+                    <input type="number" id="cantidad" name="cantidad" required>
                 </p>
                 <p>
                     <label for="fecha">fecha</label>
-                    <input type="date" class="fecha" name="fecha " required>
+                    <input type="date" id="fecha" name="fecha " required>
                 </p>
                 <p>
                     <button type="submit">Guardar gasto</button>
