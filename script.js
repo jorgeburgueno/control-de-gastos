@@ -146,7 +146,7 @@ function updateChart() {
 }
 
 //creacion y display de presupuesto
-let budget = 0;
+let budget = JSON.parse(localStorage.getItem("budget")) || 0;
 
 btnBudget.addEventListener('click', () => {
     budgetForm.classList.remove('hidden');
@@ -154,13 +154,15 @@ btnBudget.addEventListener('click', () => {
 
 budgetForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    budget += Number(document.querySelector('#cantidadb').value);
+    budget = Number(document.querySelector('#cantidadb').value);    
+    localStorage.setItem("budget", JSON.stringify(budget));
     budgetForm.classList.add('hidden');
+    document.querySelector('#cantidadb').value = '';
     renderBudget();
 });
 
 function renderBudget() {          
-
+    
     let presupuesto = document.querySelector('.presupuesto');
     
     if (!presupuesto) {
