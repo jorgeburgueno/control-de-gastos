@@ -30,7 +30,8 @@ gastoForm.addEventListener('submit', (event) => {
 function addGasto(gasto){
     gastos.push(gasto);
     localStorage.setItem("gastos", JSON.stringify(gastos));
-    addTotalGastos(gasto)
+    addTotalGastos(gasto);
+    renderChart();
     render(gasto, gastos.length - 1);
 };
 
@@ -53,6 +54,7 @@ gastosContainer.addEventListener('click', (event) =>{
         gastos = gastos.filter((_, i) => i !== gastoId);        
         localStorage.setItem("gastos", JSON.stringify(gastos));              
         renderAllGastos();
+        renderChart();
     }
 })
 
@@ -94,16 +96,58 @@ function restaTotalGastos(gasto){
     renderTotal();
 }
 
-function renderTotal(){
+function renderTotal() {
     totalGastos = JSON.parse(localStorage.getItem("totalgastos")) || 0;
-    totalContainer.innerHTML = '';
-    const totalGasto = document.createElement('div');
-    totalGasto.classList.add('total');
-    totalGasto.innerHTML = `<p> Total de gastos : ${totalGastos}`
-
-    totalContainer.appendChild(totalGasto);    
+       
+    let totalGasto = document.querySelector('.total');
+    
+    if (!totalGasto) {
+        totalGasto = document.createElement('div');
+        totalGasto.classList.add('total');
+        totalContainer.appendChild(totalGasto);
+    }
+    
+    totalGasto.innerHTML = `<p>Total de gastos: ${totalGastos}</p>`;
 }
 
 
-renderTotal();
-renderAllGastos();
+// creacion de chart 
+
+let chart; 
+
+function renderChart() {
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    if (chart) {
+        chart.destroy(); 
+    }
+
+    chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: gastos.map(x => x.categoria),
+            datasets: [{
+                label: 'Cantidad gastada',
+                data: gastos.map(x => x.cantidad)
+            }]
+        }
+    });
+}
+
+function updateChart() {
+    if (!chart) return;
+
+    chart.data.labels = gastos.map(x => x.categoria);
+    chart.data.datasets[0].data = gastos.map(x => x.cantidad);
+    chart.update();
+}
+
+//render todo al iniciar la pagina
+
+document.addEventListener("DOMContentLoaded", () => {
+    gastos = JSON.parse(localStorage.getItem("gastos")) || [];
+    renderTotal();
+    renderChart();
+    renderAllGastos();
+});
+

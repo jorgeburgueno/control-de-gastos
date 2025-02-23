@@ -78,6 +78,7 @@ body{
 .budget-container {
     width: 30%;
 }
-.total-container {
+#total-container {
     width: 30%;
 }
+
