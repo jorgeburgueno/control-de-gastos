@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     
@@ -15,7 +15,7 @@
         <aside class="sidebar">sidebar</aside>
         <main class="main">   
             <button class="nuevo-btn">Crear nuevo gasto</button>
-            <form id="gastos-form">
+            <form id="gastos-form" class="hidden">
                 <legend>Crear nuevo gasto</legend>
                 <select id="categoria" name="categoria" required>
                     <option value="" disabled selected>Seleccione una categoria</option>
@@ -31,7 +31,7 @@
                 </p>
                 <p>
                     <label for="fecha">fecha</label>
-                    <input type="date" id="fecha" name="fecha " required>
+                    <input type="date" id="fecha" name="fecha" required>
                 </p>
                 <p>
                     <button type="submit">Guardar gasto</button>
@@ -39,6 +39,8 @@
                 </p>
             </form>
             <div class="gastos-container"></div>
+            <div class="total-container"></div>
+            <div class="budget-container">asd</div>
         </main>
         <footer class="footer">footer</footer>
     <script src="script.js"></script>

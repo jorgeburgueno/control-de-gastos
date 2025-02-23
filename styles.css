@@ -42,3 +42,42 @@ body{
 .hidden{
     display: none;
 }
+
+#gastos-form{    
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 5px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+.nuevo-btn{
+   width: 10%; 
+   height: 50px;
+   padding: 10px 20px;
+   font-size: 16px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;    
+   background-color: 007ACC ;
+   
+}
+
+.main{
+    display: flex;
+    
+    
+}
+.gastos-container {
+    width: 30%;
+}
+.budget-container {
+    width: 30%;
+}
+.total-container {
+    width: 30%;
+}
