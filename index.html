@@ -12,9 +12,11 @@
         <header class="header">header
             <nav></nav>
         </header>
-        <aside class="sidebar">sidebar</aside>
-        <main class="main">   
+        <aside class="sidebar">sidebar
             <button class="nuevo-btn">Crear nuevo gasto</button>
+            <button class="budget-btn">Crear presupuesto</button>
+        </aside>
+        <main class="main">
             <form id="gastos-form" class="hidden">
                 <legend>Crear nuevo gasto</legend>
                 <select id="categoria" name="categoria" required>
@@ -38,15 +40,23 @@
                     <button type="button" class="cancel-btn">Cancel</button>
                 </p>
             </form>
+            <form id="budget-form" class="hidden">
+                <legend>Crear nuevo presupuesto</legend>                           
+                <p>
+                    <label for="cantidadb">cantidad</label>
+                    <input type="number" id="cantidadb" name="cantidadb" required>
+                </p>                
+                <p>
+                    <button type="submit">Guardar gasto</button>
+                    <button type="button" class="cancel-btn">Cancel</button>
+                </p>
+            </form>
             <div class="gastos-container"></div>
             <div class="total-container">
                 <canvas id="myChart"></canvas>
             </div>
-            <div class="budget-container">asd</div>
-        </main>
-        <div>
-            
-        </div>
+            <div class="budget-container"></div>
+        </main>        
         <footer class="footer">footer</footer>        
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>            
     <script src="script.js"></script>

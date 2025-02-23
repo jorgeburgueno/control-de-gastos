@@ -2,8 +2,11 @@ let main = document.querySelector(".main");
 let gastosContainer = document.querySelector(".gastos-container");
 let totalContainer = document.querySelector(".total-container");
 let gastoForm = document.querySelector("#gastos-form");
+let budgetForm = document.querySelector('#budget-form');
 let btnNuevo = document.querySelector('.nuevo-btn');
+let btnBudget = document.querySelector('.budget-btn');
 let btnDelete = document.querySelector('.eliminar');
+let budgetContainer = document.querySelector('.budget-container');
 
 
 let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
@@ -142,6 +145,36 @@ function updateChart() {
     chart.update();
 }
 
+//creacion y display de presupuesto
+let budget = 0;
+
+btnBudget.addEventListener('click', () => {
+    budgetForm.classList.remove('hidden');
+});
+
+budgetForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    budget += Number(document.querySelector('#cantidadb').value);
+    budgetForm.classList.add('hidden');
+    renderBudget();
+});
+
+function renderBudget() {          
+
+    let presupuesto = document.querySelector('.presupuesto');
+    
+    if (!presupuesto) {
+        presupuesto = document.createElement('div');
+        presupuesto.classList.add('presupuesto');
+        budgetContainer.appendChild(presupuesto);
+    }
+    
+    presupuesto.innerHTML = `<p>Presupuesto: ${budget}</p>`;
+}
+
+
+
+
 //render todo al iniciar la pagina
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -149,5 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTotal();
     renderChart();
     renderAllGastos();
+    renderBudget()
 });
 
