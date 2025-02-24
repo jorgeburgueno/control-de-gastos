@@ -16,7 +16,8 @@
             <button class="nuevo-btn">Crear nuevo gasto</button>
             <button class="budget-btn">Crear presupuesto</button>
         </aside>
-        <main class="main">
+        <main class="main">           
+            
             <form id="gastos-form" class="hidden">
                 <legend>Crear nuevo gasto</legend>
                 <select id="categoria" name="categoria" required>
@@ -51,7 +52,23 @@
                     <button type="button" class="cancel-btn">Cancel</button>
                 </p>
             </form>
-            <div class="gastos-container"></div>
+            <div class="gastos-container">
+            <div class="filters">
+                <select id="filtro-categoria">
+                    <option value="all" selected>Seleccione una categoria</option>
+                    <option value="food">Comida</option>
+                    <option value="transporte">Transporte</option>
+                    <option value="entretenimiento">Entretenimiento</option>
+                    <option value="servicios">Servicios</option>
+                    <option value="otro">Otro</option>
+                </select>                
+                <input type="date" id="filtro-fecha-inicial">
+                <input type="date" id="filtro-fecha-final"> 
+                <button id="filtrar-fecha-btn">Filtrar por Fecha</button>               
+                <input type="range" class ="filtro-costo" min="0" max="1000">                
+                <button onclick="clearFilters()">Limpiar</button>
+              </div>
+            <div class="gastos"></div></div>
             <div class="total-container">
                 <canvas id="myChart"></canvas>
             </div>

@@ -1,5 +1,5 @@
 let main = document.querySelector(".main");
-let gastosContainer = document.querySelector(".gastos-container");
+let gastosContainer = document.querySelector(".gastos");
 let totalContainer = document.querySelector(".total-container");
 let gastoForm = document.querySelector("#gastos-form");
 let budgetForm = document.querySelector('#budget-form');
@@ -10,7 +10,10 @@ let budgetContainer = document.querySelector('.budget-container');
 let presupuestoTotalDisplay = document.querySelector('#presupuestoTotalDisplay');
 let presupuestoResDisplay = document.querySelector('#presupuestoResDisplay');
 const progressBar = document.querySelector('.progress-bar');
-const decrementButton = document.getElementById('decrementButton');
+let filtroCategoria = document.querySelector('#filtro-categoria');
+const filtroFechaInicial = document.querySelector('#filtro-fecha-inicial');
+const filtroFechaFinal = document.querySelector('#filtro-fecha-final');
+const filtrarFechaBtn = document.querySelector('#filtrar-fecha-btn');
 
 
 let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
@@ -84,8 +87,47 @@ function renderAllGastos(){
     gastosContainer.innerHTML = '';
     gastos.forEach((gasto, index) => {
         render(gasto, index)
-    });
-    
+    });    
+   
+}
+
+
+
+
+//Filtro de gastos
+
+function filtroPorCategoria(gastos){
+    return gastos.reduce((acc, gasto) => {
+        const categoria = gasto.categoria;
+        if(!acc[categoria]){
+            acc[categoria] = [];
+        }
+        acc[categoria].push(gasto);   
+        return acc;              
+    }, {});   
+}
+
+
+filtroCategoria.addEventListener('change', (event) => {
+    const selected = event.target.value;  
+    displaySeleccion(selected);
+});
+
+function displaySeleccion(select){
+    let organizado = filtroPorCategoria(gastos);
+    if (select === 'all') {
+        renderAllGastos();        
+    } else {
+        let filteredGastos = organizado[select] || [];
+        rendeGastosFiltrados(filteredGastos); 
+    }
+}
+
+function rendeGastosFiltrados(filteredGastos){
+    gastosContainer.innerHTML = "";
+    filteredGastos.forEach((gasto, index) => {
+        render(gasto, index);
+    })
 }
 
 // calcula y muestra total de gastos
