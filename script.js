@@ -7,6 +7,10 @@ let btnNuevo = document.querySelector('.nuevo-btn');
 let btnBudget = document.querySelector('.budget-btn');
 let btnDelete = document.querySelector('.eliminar');
 let budgetContainer = document.querySelector('.budget-container');
+let presupuestoTotalDisplay = document.querySelector('#presupuestoTotalDisplay');
+let presupuestoResDisplay = document.querySelector('#presupuestoResDisplay');
+const progressBar = document.querySelector('.progress-bar');
+const decrementButton = document.getElementById('decrementButton');
 
 
 let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
@@ -90,13 +94,21 @@ let totalGastos = JSON.parse(localStorage.getItem("totalgastos")) || 0;
 function addTotalGastos(gasto){
     totalGastos +=  Number(gasto.cantidad); 
     localStorage.setItem("totalgastos", JSON.stringify(totalGastos));
+    budget -= Number(gasto.cantidad);
     renderTotal();
+    localStorage.setItem("budget", JSON.stringify(budget));
+    renderBudget();
+    updateProgressBar();
 }
 
 function restaTotalGastos(gasto){
     totalGastos -= Number(gasto.cantidad);
     localStorage.setItem("totalgastos", JSON.stringify(totalGastos));
+    budget += Number(gasto.cantidad);
     renderTotal();
+    localStorage.setItem("budget", JSON.stringify(budget));
+    renderBudget();
+    updateProgressBar();
 }
 
 function renderTotal() {
@@ -147,35 +159,37 @@ function updateChart() {
 
 //creacion y display de presupuesto
 let budget = JSON.parse(localStorage.getItem("budget")) || 0;
+let presupuestoTotal = JSON.parse(localStorage.getItem("presupuestoTotal")) || 0;
 
-btnBudget.addEventListener('click', () => {
+
+    btnBudget.addEventListener('click', () => {
     budgetForm.classList.remove('hidden');
 });
 
-budgetForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    budget = Number(document.querySelector('#cantidadb').value);    
-    localStorage.setItem("budget", JSON.stringify(budget));
-    budgetForm.classList.add('hidden');
-    document.querySelector('#cantidadb').value = '';
-    renderBudget();
-});
+    budgetForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        budget = Number(document.querySelector('#cantidadb').value);
+        presupuestoTotal = Number(document.querySelector('#cantidadb').value);
+        localStorage.setItem("budget", JSON.stringify(budget));
+        localStorage.setItem("presupuestoTotal", JSON.stringify(presupuestoTotal));
+        budgetForm.classList.add('hidden');
+        document.querySelector('#cantidadb').value = '';
+        renderBudget();
+        updateProgressBar();        
+    });
 
-function renderBudget() {          
-    
-    let presupuesto = document.querySelector('.presupuesto');
-    
-    if (!presupuesto) {
-        presupuesto = document.createElement('div');
-        presupuesto.classList.add('presupuesto');
-        budgetContainer.appendChild(presupuesto);
-    }
-    
-    presupuesto.innerHTML = `<p>Presupuesto: ${budget}</p>`;
+function renderBudget() {       
+    presupuestoTotalDisplay.textContent = presupuestoTotal;
+    presupuestoResDisplay.textContent = budget;
 }
 
+function updateProgressBar() {
+    const percentage = (budget / presupuestoTotal) * 100;
+    progressBar.style.height = (100 - percentage) + '%';
 
-
+}
+  
+  
 
 //render todo al iniciar la pagina
 
@@ -184,6 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTotal();
     renderChart();
     renderAllGastos();
-    renderBudget()
+    renderBudget(); 
+    updateProgressBar();   
 });
 
