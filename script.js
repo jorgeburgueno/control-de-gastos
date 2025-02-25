@@ -301,10 +301,15 @@ document.addEventListener("DOMContentLoaded", () => {
 const toggleButton = document.getElementById("dark-mode-toggle");
 const body = document.body;
 
-// Check if dark mode was previously enabled
+function setDarkModeButtonText(isDarkMode) {
+    toggleButton.textContent = isDarkMode ? "Light Mode" : "Dark Mode";
+}
+
 if (localStorage.getItem("dark-mode") === "enabled") {
     body.classList.add("dark-mode");
-    toggleButton.textContent = "Light Mode";
+    setDarkModeButtonText(true);
+} else {
+    setDarkModeButtonText(false);
 }
 
 toggleButton.addEventListener("click", () => {
@@ -312,9 +317,9 @@ toggleButton.addEventListener("click", () => {
 
     if (body.classList.contains("dark-mode")) {
         localStorage.setItem("dark-mode", "enabled");
-        toggleButton.textContent = "Light Mode";
+        setDarkModeButtonText(true); 
     } else {
         localStorage.setItem("dark-mode", "disabled");
-        toggleButton.textContent = "Dark Mode";
+        setDarkModeButtonText(false); 
     }
 });
