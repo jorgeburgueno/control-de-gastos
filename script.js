@@ -42,7 +42,7 @@ function addGasto(gasto){
     localStorage.setItem("gastos", JSON.stringify(gastos));
     addTotalGastos(gasto);
     renderChart();
-    render(gasto, gastos.length - 1);
+    renderAllGastos();
 };
 
 // cierra form al cancelar
@@ -85,14 +85,21 @@ function render(gasto, index){
 
 function renderAllGastos(){
     gastosContainer.innerHTML = '';
-    gastos.forEach((gasto, index) => {
+    const sortedGastos = gastos.sort((a, b) => {
+        const dateA = new Date(a.fecha);
+        const dateB = new Date(b.fecha);
+
+        if (dateB - dateA !== 0) {            
+            return dateB - dateA;
+        } else {           
+            return gastos.indexOf(b) - gastos.indexOf(a);
+        }
+    });
+
+    sortedGastos.forEach((gasto, index) => {
         render(gasto, index)
-    });    
-   
+    });       
 }
-
-
-
 
 //Filtro de gastos
 
@@ -157,7 +164,9 @@ function filterByDateRange(gastos, fechaInicial, fechaFinal) {
 
 function renderFilteredGastos(filteredGastos) {
     gastosContainer.innerHTML = ''; 
-    filteredGastos.forEach((gasto, index) => {
+
+    const sortedGastos = filteredGastos.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+    sortedGastos.forEach((gasto, index) => {
       render(gasto, index); 
     });
 }
@@ -274,8 +283,6 @@ function updateProgressBar() {
 
 }
   
-  
-
 //render todo al iniciar la pagina
 
 document.addEventListener("DOMContentLoaded", () => {
