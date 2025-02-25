@@ -130,6 +130,49 @@ function rendeGastosFiltrados(filteredGastos){
     })
 }
 
+//filtrar por fecha
+
+filtrarFechaBtn.addEventListener('click', () => {
+    let fechaInicial = filtroFechaInicial.value;
+    let fechaFinal = filtroFechaFinal.value;
+
+    if (!fechaInicial || !fechaFinal) {
+        alert("Por favor, selecciona ambas fechas.");
+        return;
+      }
+    const filteredGastos = filterByDateRange(gastos, fechaInicial, fechaFinal);
+    renderFilteredGastos(filteredGastos);
+    updateChart(filteredGastos); 
+})
+
+function filterByDateRange(gastos, fechaInicial, fechaFinal) {
+    return gastos.filter((gasto) => {
+      const gastoFecha = new Date(gasto.fecha);
+      const startDate = new Date(fechaInicial);
+      const endDate = new Date(fechaFinal);  
+      
+      return gastoFecha >= startDate && gastoFecha <= endDate;
+    });
+  }
+
+function renderFilteredGastos(filteredGastos) {
+    gastosContainer.innerHTML = ''; 
+    filteredGastos.forEach((gasto, index) => {
+      render(gasto, index); 
+    });
+}
+
+// limpia los filtros
+
+function clearFilters(){
+    filtroCategoria.value = 'all';
+    filtroFechaInicial.value = "";
+    filtroFechaFinal.value = '';
+    renderAllGastos();
+}
+
+
+
 // calcula y muestra total de gastos
 let totalGastos = JSON.parse(localStorage.getItem("totalgastos")) || 0;
 

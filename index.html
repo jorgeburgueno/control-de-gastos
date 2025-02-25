@@ -22,7 +22,7 @@
                 <legend>Crear nuevo gasto</legend>
                 <select id="categoria" name="categoria" required>
                     <option value="" disabled selected>Seleccione una categoria</option>
-                    <option value="food">Comida</option>
+                    <option value="comida">Comida</option>
                     <option value="transporte">Transporte</option>
                     <option value="entretenimiento">Entretenimiento</option>
                     <option value="servicios">Servicios</option>
@@ -56,7 +56,7 @@
             <div class="filters">
                 <select id="filtro-categoria">
                     <option value="all" selected>Seleccione una categoria</option>
-                    <option value="food">Comida</option>
+                    <option value="comida">Comida</option>
                     <option value="transporte">Transporte</option>
                     <option value="entretenimiento">Entretenimiento</option>
                     <option value="servicios">Servicios</option>
@@ -64,9 +64,8 @@
                 </select>                
                 <input type="date" id="filtro-fecha-inicial">
                 <input type="date" id="filtro-fecha-final"> 
-                <button id="filtrar-fecha-btn">Filtrar por Fecha</button>               
-                <input type="range" class ="filtro-costo" min="0" max="1000">                
-                <button onclick="clearFilters()">Limpiar</button>
+                <button id="filtrar-fecha-btn">Filtrar por Fecha</button> 
+                <button onclick="clearFilters()">Limpiar filtros</button>
               </div>
             <div class="gastos"></div></div>
             <div class="total-container">
