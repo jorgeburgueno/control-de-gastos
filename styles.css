@@ -15,30 +15,30 @@ body{
 
 .header{
     grid-area: header;
-    background-color: #3498db;
+    background-color: #2c3e50;
     color: white;
     padding: 20px;
 }
 
 .sidebar{
     grid-area: sidebar;
-    background-color: #2ecc71;
+    background-color: #2c3e50;
     color: white;
     padding: 20px;
 }
 
 .main {
     grid-area: main;
-    background-color: #f1c40f;
+    background-color: #ffffff;
     color: black;
     padding: 20px;
 }
 
 .footer{
     grid-area: footer;
-    background-color: #3498db;
+    background-color: #2c3e50;
     color: white;
-    text-align: center;
+    text-align: end;
     padding: 20px;
 }
 
@@ -83,6 +83,12 @@ body{
 
 .total-container {
     width: 25%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;   
+    flex-grow: 1; 
+
 }
 
 .budget-container {
@@ -93,12 +99,13 @@ body{
     flex-grow: 1; 
 }
 
+
 .progress-bar-container {
-    width: 20px;
+    width: 40px;
     height: 300px;
     background-color: rgb(0, 255, 115); 
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -112,4 +119,120 @@ body{
     align-self: flex-start;
   }
 
-  
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.sidebar button {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.gastos-container {
+    width: 33%;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.gastos-card {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items:baseline;
+    justify-content: space-between;
+    font-size: 14px;
+    width: 96%; 
+    margin: 0 auto 0 0;
+}
+
+.categoria-card {
+    flex: 1;
+    color: #2980b9;
+    font-weight: bold;
+}
+
+.cantidad-card {
+    flex: 1;
+    text-align: center;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.fecha-card{
+    flex: 1;    
+    color: #333;    
+    text-align: left; 
+    padding-left: 20px;
+}
+
+
+.dark-mode {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.dark-mode .header {
+    background-color: #333;
+}
+
+.dark-mode .sidebar {
+    background-color: #222;
+}
+
+.dark-mode .main {
+    background-color: #2c2c2c;
+    color: white;
+}
+
+.dark-mode .footer {
+    background-color: #333;
+}
+
+.dark-mode .gastos-container{
+    background-color: #2c2c2c;
+    color: white;
+}
+
+.dark-mode button {
+    background-color: #444 !important;
+    color: white !important;
+    border: 1px solid #666 !important;
+}
+
+.dark-mode button:hover {
+    background-color: #555 !important;
+}
+.dark-mode .fecha-card{
+    color: white;
+}
+
+.dark-mode .gastos-card {
+    background-color: #2b2b2b !important; 
+    color: white !important;
+    border: 1px solid #444 !important; 
+    border-radius: 8px; 
+    padding: 10px;
+}
+
+.dark-mode .card {
+    background-color: #3b3b3b !important; 
+    color: white !important;
+    border: 1px solid #555 !important; 
+    border-radius: 6px; 
+    padding: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+

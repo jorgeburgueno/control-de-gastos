@@ -75,10 +75,12 @@ function render(gasto, index){
     const nuevoGasto = document.createElement('div');
     nuevoGasto.classList.add('gasto');
     nuevoGasto.setAttribute('data-id', index);
-    nuevoGasto.innerHTML = `<p> categoria: ${gasto.categoria}</p>
-                            <p> cantidad: ${gasto.cantidad}</p>
-                            <p> fecha: ${gasto.fecha}</p>
+    nuevoGasto.innerHTML = `<div class="gastos-card">
+                            <p class="categoria-card"> categoria: ${gasto.categoria}</p>
+                            <p class="cantidad-card"> cantidad: ${gasto.cantidad}</p>
+                            <p class="fecha-card"> fecha: ${gasto.fecha}</p>
                             <button class= 'eliminar'>eliminar</button> 
+                            </div>
                             `
     gastosContainer.appendChild(nuevoGasto);
 }
@@ -294,3 +296,25 @@ document.addEventListener("DOMContentLoaded", () => {
     updateProgressBar();   
 });
 
+// Dark mode
+
+const toggleButton = document.getElementById("dark-mode-toggle");
+const body = document.body;
+
+// Check if dark mode was previously enabled
+if (localStorage.getItem("dark-mode") === "enabled") {
+    body.classList.add("dark-mode");
+    toggleButton.textContent = "Light Mode";
+}
+
+toggleButton.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+
+    if (body.classList.contains("dark-mode")) {
+        localStorage.setItem("dark-mode", "enabled");
+        toggleButton.textContent = "Light Mode";
+    } else {
+        localStorage.setItem("dark-mode", "disabled");
+        toggleButton.textContent = "Dark Mode";
+    }
+});
